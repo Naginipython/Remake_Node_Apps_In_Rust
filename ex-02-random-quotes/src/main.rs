@@ -9,7 +9,8 @@ pub mod view;
 #[tokio::main]
 async fn main() {
     let app = Router::new()
-        .route("/quote", get(routes::quote));
+        .route("/quote", get(routes::quote))
+        .route("/quote/:n", get(routes::quote_n));
     
     axum::Server::bind(&"0.0.0.0:3000".parse().unwrap())
         .serve(app.into_make_service())

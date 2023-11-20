@@ -3,7 +3,7 @@ use axum::extract::{ Query, Path };
 use serde::Deserialize;
 use crate::{quotes_struct::Quote, view::view_html};
 
-use self::random_quotes::{random_author, random_word};
+use self::random_quotes::{random_author, random_word, random_n};
 
 pub mod random_quotes;
 
@@ -34,7 +34,11 @@ pub async fn quote(Query(pagination_params): Query<PaginationParams>) -> Html<St
         view_html(quotes)
     } else {
         let quote: Quote = random_quotes::random();
-        
         view_html(vec![quote])
     }
+}
+
+pub async fn quote_n(Path(n): Path<i32>) -> Html<String> {
+    let quotes: Vec<Quote> = random_n(n);
+    view_html(quotes)
 }

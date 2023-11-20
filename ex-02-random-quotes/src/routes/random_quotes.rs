@@ -19,9 +19,9 @@ fn get_quotes() -> Vec<Quote> {
 }
 
 pub fn random() -> Quote {
-    let quotes_vec = get_quotes();
+    let quotes_vec: Vec<Quote> = get_quotes();
     
-    let rng = rand::thread_rng().gen_range(1..=quotes_vec.len());
+    let rng = rand::thread_rng().gen_range(1..=quotes_vec.len()-1);
     let default = Quote { quote: String::from(""), author: String::from("") };
 
     quotes_vec.get(rng).unwrap_or_else(|| {
@@ -29,8 +29,17 @@ pub fn random() -> Quote {
     }).clone()
 }
 
+pub fn random_n(n: i32) -> Vec<Quote> {
+    let mut result: Vec<Quote> = Vec::new();
+
+    for _i in 0..n {
+        result.push(random());
+    }
+    result
+}
+
 pub fn random_author(author: String) -> Vec<Quote> {
-    let quotes_vec = get_quotes();
+    let quotes_vec: Vec<Quote> = get_quotes();
 
     quotes_vec.into_iter()
         .filter(|q| q.author.eq_ignore_ascii_case(&author))
@@ -38,7 +47,7 @@ pub fn random_author(author: String) -> Vec<Quote> {
 } 
 
 pub fn random_word(word: String) -> Vec<Quote> {
-    let quotes_vec = get_quotes();
+    let quotes_vec: Vec<Quote> = get_quotes();
 
     quotes_vec.into_iter()
         .filter(|q| q.quote.to_ascii_lowercase().contains(&word.to_ascii_lowercase()))
