@@ -29,7 +29,7 @@ Creates an Axum server on localhost:3000, which has routes to send text to scree
   <b>'/add/:a/:b':</b> Takes a and b as i32, and adds them, sending the result to the screen.<br>
 </details>
 
-### 02_Random_Quotes \[WIP: Need /quotes/:n\]
+### 02_Random_Quotes
 Creates an Axum server on localhost:3000, which will get quotes from a JSON file to randomly give to the user. Learned Serde file extraction and deserialization into structs, learned some more about Rust vector interation (filtration, map), learned Axum's HTML return type and Query extraction, as well as how to make it so queries are optional. 
 <br>
 <details>
