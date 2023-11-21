@@ -45,9 +45,9 @@ async fn main() {
         .route("/products", get(routes::get_products).post(routes::post_products));
 
     // Listen on port 3000
+    println!("Server is running on locahost:3000");
     axum::Server::bind(&"0.0.0.0:3000".parse().unwrap())
         .serve(app.into_make_service())
         .await
         .unwrap();
-    println!("Server is running on locahost:3000");
 }

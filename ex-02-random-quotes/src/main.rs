@@ -12,9 +12,9 @@ async fn main() {
         .route("/quote", get(routes::quote))
         .route("/quote/:n", get(routes::quote_n));
     
+    println!("Server is running on localhost:3000");
     axum::Server::bind(&"0.0.0.0:3000".parse().unwrap())
         .serve(app.into_make_service())
         .await
         .unwrap();
-    println!("Server is running on localhost:3000");
 }
