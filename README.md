@@ -40,3 +40,13 @@ Creates an Axum server on localhost:3000, which will get quotes from a JSON file
   <b>'/quotes?author=[name]&word=[word]':</b> Quotes route contains optional query parameters to allow a user to get quotes from a specific author (case insensitive) or containing a specific word (also case insensitive). The user can use both, one, or none of these.
   <b>'/quotes/:n':</b> Sends n number of quotes to the user, in an HTML table.
 </details>
+
+### 03_Weather_Api
+Creates an Axum server on localhost:3000, which contains a route that requests a latitude and longitude, so that it can call a fetch to Open Weather Map and return JSON of the data it receieved. I learned about Reqwest, and converting Strings to serde's Value (JSON), though I ended up not using it, since Reqwest can already convert data to a Value.
+<br>
+<details>
+  <summary>Routes:</summary>
+  <br>
+  GET <br>
+  <b>'/myweather/:lat/:long'</b> Takes in a latitude and Longitude, as a whole or decimal number, and returns with OpenWeatherMap data for that latitude and Longitude.
+</details>
