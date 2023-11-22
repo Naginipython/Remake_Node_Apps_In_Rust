@@ -19,6 +19,7 @@ pub async fn hello() -> Json<Value> {
     Json(json!({ "message": "hello world" }))
 }
 
+// ISSUE: If "drink" is NOT a String, crashes
 pub async fn cocktail(extract::Json(data): extract::Json<DrinkExtract>) -> Json<Value> {
     // Note: With this, a user CAN send incorrect JSON, but it will not return anything interesting.
     let data: Drink = Drink {
