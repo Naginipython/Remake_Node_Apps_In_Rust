@@ -30,8 +30,7 @@ Creates an Axum server on localhost:3000, which has routes to send text to scree
 </details>
 
 ### 02_Random_Quotes
-Creates an Axum server on localhost:3000, which will get quotes from a JSON file to randomly give to the user. Learned Serde file extraction and deserialization into structs, learned some more about Rust vector interation (filtration, map), learned Axum's HTML return type and Query extraction, as well as how to make it so queries are optional. 
-<br>
+Creates an Axum server on localhost:3000, which will get quotes from a JSON file to randomly give to the user. Learned Serde file extraction and deserialization into structs, learned some more about Rust vector interation (filtration, map), learned Axum's HTML return type and Query extraction, as well as how to make it so queries are optional. <br>
 <details>
   <summary>Routes:</summary>
   <br>
@@ -42,11 +41,21 @@ Creates an Axum server on localhost:3000, which will get quotes from a JSON file
 </details>
 
 ### 03_Weather_Api
-Creates an Axum server on localhost:3000, which contains a route that requests a latitude and longitude, so that it can call a fetch to Open Weather Map and return JSON of the data it receieved. I learned about Reqwest, and converting Strings to serde's Value (JSON), though I ended up not using it, since Reqwest can already convert data to a Value.
-<br>
+Creates an Axum server on localhost:3000, which contains a route that requests a latitude and longitude, so that it can call a fetch to Open Weather Map and return JSON of the data it receieved. I learned about Reqwest, and converting Strings to serde's Value (JSON), though I ended up not using it, since Reqwest can already convert data to a Value. <br>
 <details>
   <summary>Routes:</summary>
   <br>
   GET <br>
-  <b>'/myweather/:lat/:long'</b> Takes in a latitude and Longitude, as a whole or decimal number, and returns with OpenWeatherMap data for that latitude and Longitude.
+  <b>'/myweather/:lat/:long':</b> Takes in a latitude and Longitude, as a whole or decimal number, and returns with OpenWeatherMap data for that latitude and Longitude.
+</details>
+
+### 04_Cocktails
+Created an Axum server on localhost:3000, which contains 2 routes, a simple Hello, World! GET request, and a POST request that allows a user to send JSON of a drink name, to then send to thecocktaildb and parse data on only the drink names, and return an array of those names. Learned about cargo-watch (I like 'cargo-watch -q -x 'run''), and learned more about Serde_Json, such as how to parse through JSON. Added multiple areas of error-checking, such as allowing a user to send no/incorrect data (to where it sends an empty array), and allowed for handling of data that doesn't meet expectations (via json format discrepancies, bad fetch, etc) <br>
+<details>
+  <summary>Routes:</summary>
+  <br>
+  GET <br>
+  <b>'/test/hello':</b> Sends simple JSON message.<br>
+  POST <br>
+  <b>'/test/cocktail' | Body: {drink: String}:</b> Takes a JSON object with a 'drink' property and sends that thecocktaildb, and sends the user an array of all cocktails contained in the String.
 </details>
