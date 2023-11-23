@@ -50,7 +50,7 @@ Creates an Axum server on localhost:3000, which contains a route that requests a
 </details>
 
 ### 04_Cocktails
-Created an Axum server on localhost:3000, which contains 2 routes, a simple Hello, World! GET request, and a POST request that allows a user to send JSON of a drink name, to then send to thecocktaildb and parse data on only the drink names, and return an array of those names. Learned about cargo-watch (I like 'cargo-watch -q -x 'run''), and learned more about Serde_Json, such as how to parse through JSON. Added multiple areas of error-checking, such as allowing a user to send no/incorrect data (to where it sends an empty array), and allowed for handling of data that doesn't meet expectations (via json format discrepancies, bad fetch, etc) <br>
+Created an Axum server on localhost:3000, which contains 2 routes, a simple Hello, World! GET request, and a POST request that allows a user to send JSON of a drink name, to then send to thecocktaildb and parse data on only the drink names, and return an array of those names. Learned about cargo-watch (I like 'cargo-watch -q -x 'run''), and learned more about Serde_Json, such as how to parse through JSON. Added multiple areas of error-checking, such as allowing a user to send no/incorrect data (to where it sends an empty array), and allowed for handling of data that doesn't meet expectations (via json format discrepancies, bad fetch, etc). I took time later to figure out middleware, and ran into issues where axum wasn't updated to suit tower-http. Figured out getting basic request logging, only accepting JSON as a header, and cors.<br>
 <details>
   <summary>Routes:</summary>
   <br>
