@@ -1,4 +1,5 @@
 # Remake_Node_Apps_In_Rust
+The goal of this repo is to recreate all my apps created in https://github.com/Naginipython/Scalable_Web_Systems into Rust
 
 ### Non-Blocking IO
 Takes in a vector of files, and reads their content to the screen. The files are hard-coded.
