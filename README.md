@@ -59,3 +59,15 @@ Created an Axum server on localhost:3000, which contains 2 routes, a simple Hell
   POST <br>
   <b>'/test/cocktail' | Body: {drink: String}:</b> Takes a JSON object with a 'drink' property and sends that thecocktaildb, and sends the user an array of all cocktails contained in the String.
 </details>
+
+### 05_Caesar-Cypher
+Created an Axum server on localhost:3000, which contains 4 routes, 2 simple 'hello' POST requests, for some testing, and 2 POST requests for encrypting and decrypting, 'testEncrypt' and 'testDecrypt'. This was a particularily troublesome exercise, as Axum had just updated to implement better middleware features, but I struggled to figure out how to use Tower and Http with Axum, as there wasn't very detailed documentation. I did en up figuring it out, and implemented 'my_middleware', which would go between every route but only change data if the routes are 'testEncrypt' and 'testDecrypt'. Here, a user would add a shift in the path, as well as send JSON in the body, and the middleware would take both of those and encrypt/decrypt a word in the JSON, as well as append a time and date. Afterwards, it would continue sending requests through the layers an it would, until it reaches the POSTs. I learned how to create my own Error responses, how to get a body from an incoming request (through it's bytes), I learned how to modify headers (I need to change header's content-length), and I used a cool in-line function closure to modify char_codes for the en/decryption (the_math variable). <br>
+<details>
+  <summary>Routes:</summary>
+  <br>
+  POST <br>
+  <b>'/testEncrypt/:shift' | Body: {word: String}:</b> Takes a JSON object with a 'word' property, and a positive shift value in the path, and returns the 'word' property word, shifted alphabetically by the shift number. It also contains new fields, a 'date' of the current date, and 'time', of the current time.<br>
+  <b>'/testDecrypt/:shift' | Body: {word: String}:</b> Takes a JSON object with a 'word' property, and a positive shift value in the path, and returns the 'word' property word, shifted alphabetically by the shift number. It also contains new fields, a 'date' of the current date, and 'time', of the current time.<br>
+  <b>'/hello/':</b> A POST request that simply sends text.<br>
+  <b>'/helloeveryoneintheworld/':</b> A POST request that simply sends text.<br>
+</details>
