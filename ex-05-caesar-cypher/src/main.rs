@@ -5,16 +5,6 @@ use axum::{
 };
 use crate::modules::*;
 
-//temp
-use tower::ServiceBuilder;
-use http::Method;
-use tracing::Level;
-use tower_http::{
-    trace::{ self, TraceLayer },
-    cors::{ Any, CorsLayer },
-    validate_request::ValidateRequestHeaderLayer,
-};
-
 mod routes;
 mod the_middleware;
 pub mod modules;
@@ -36,27 +26,13 @@ async fn main() {
         .compact()
         .init();
 
-    let app = Router::new()
+    let mut app = Router::new()
         .route("/testEncrypt/:shift", post(routes::encrypt))
         .route("/testDecrypt/:shift", post(routes::decrypt))
         .route("/hello", post(hello))
         .route("/helloeveryoneintheworld", post(hello_two))
-        .layer(middleware::from_fn(my_middleware::my_middleware))
-        // .merge(the_middleware::middleware()) //Ideally, I use this instead of below
-        .layer(
-            ServiceBuilder::new()
-                .layer(
-                    TraceLayer::new_for_http()
-                        .make_span_with(trace::DefaultMakeSpan::new().level(Level::INFO))
-                        .on_response(trace::DefaultOnResponse::new().level(Level::INFO))
-                )
-                .layer(ValidateRequestHeaderLayer::accept("application/json"))
-                .layer(
-                    CorsLayer::new()
-                        .allow_methods([Method::POST])
-                        .allow_origin(Any)
-                )
-        );
+        .layer(middleware::from_fn(my_middleware::my_middleware));
+    app = the_middleware::add_middleware(app);
 
     // Old way, pre Axum 0.7.0
     // axum::Server::bind(&"0.0.0.0:3000".parse().unwrap())

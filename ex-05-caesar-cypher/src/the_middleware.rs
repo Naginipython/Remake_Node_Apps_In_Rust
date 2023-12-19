@@ -8,20 +8,19 @@ use tower_http::{
     validate_request::ValidateRequestHeaderLayer,
 };
 
-pub fn middleware() -> Router {
-    Router::new()
-        .layer(
-            ServiceBuilder::new()
-                .layer(
-                    TraceLayer::new_for_http()
-                        .make_span_with(trace::DefaultMakeSpan::new().level(Level::INFO))
-                        .on_response(trace::DefaultOnResponse::new().level(Level::INFO))
-                )
-                .layer(ValidateRequestHeaderLayer::accept("application/json"))
-                .layer(
-                    CorsLayer::new()
-                        .allow_methods([Method::POST])
-                        .allow_origin(Any)
-                )
-        )
+pub fn add_middleware(app: Router) -> Router {
+    app.layer(
+        ServiceBuilder::new()
+            .layer(
+                TraceLayer::new_for_http()
+                    .make_span_with(trace::DefaultMakeSpan::new().level(Level::INFO))
+                    .on_response(trace::DefaultOnResponse::new().level(Level::INFO))
+            )
+            .layer(ValidateRequestHeaderLayer::accept("application/json"))
+            .layer(
+                CorsLayer::new()
+                    .allow_methods([Method::POST])
+                    .allow_origin(Any)
+            )
+    )
 }
