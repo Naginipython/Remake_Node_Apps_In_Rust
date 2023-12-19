@@ -32,6 +32,7 @@ async fn main() {
         .route("/hello", post(hello))
         .route("/helloeveryoneintheworld", post(hello_two))
         .layer(middleware::from_fn(my_middleware::my_middleware));
+    
     app = the_middleware::add_middleware(app);
 
     // Old way, pre Axum 0.7.0
