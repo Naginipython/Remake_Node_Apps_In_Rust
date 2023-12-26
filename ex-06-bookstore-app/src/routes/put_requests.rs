@@ -47,7 +47,7 @@ pub async fn update_book(
             }
         },
         None => {
-            let json = json!({"Error": "id already in database"}).to_string();
+            let json = json!({"Error": "id not in database"}).to_string();
             return Response::builder()
                 .status(StatusCode::BAD_REQUEST)
                 .header("content-type", "application/json")

@@ -27,6 +27,7 @@ pub async fn app() -> Router {
     app
 }
 
+// This is for integrated tests
 pub async fn activate_local_server() -> SocketAddr {
     // I really didn't want to call this multiple times but I'd rather it doesn't get obstructed by process ordering
     let listener = tokio::net::TcpListener::bind("127.0.0.1:0").await.unwrap();

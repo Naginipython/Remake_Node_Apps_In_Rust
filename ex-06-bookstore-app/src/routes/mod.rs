@@ -1,5 +1,5 @@
 use std::{
-    fs::{self, OpenOptions, File}, 
+    fs::{self, /*OpenOptions,*/ File}, 
     process, 
     io::{Error, Write}
 };
@@ -25,8 +25,11 @@ pub fn read_books() -> Vec<Book> {
         eprintln!("Error: {err}");
         process::exit(1);
     });
-    let temp: Vec<Book> = serde_json::from_str(&books).expect("JSON was not well-formatted");
-    temp
+    
+    serde_json::from_str(&books).unwrap_or_else(|err| {
+        eprintln!("Error: {err}");
+        process::exit(1);
+    })
     // let file = File::open("books.json").expect("Error opening file");
     // let data: Vec<Book> = serde_json::from_reader(file).expect("Error getting data from file");
     // data
@@ -41,6 +44,7 @@ pub fn write_books(data: Vec<Book>) -> Result<Vec<Book>, Error> {
     
     // serde_json::to_writer_pretty(&mut file, &data)?;
     // Ok(data)
+    // TODO: Race condition here, with tests
     let json_data = serde_json::to_string(&data)?;
     let mut file = File::create("books.json")?;
     file.write_all(json_data.as_bytes())?;
