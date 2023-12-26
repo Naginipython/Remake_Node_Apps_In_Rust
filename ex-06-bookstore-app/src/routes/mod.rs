@@ -1,7 +1,7 @@
 use std::{
-    fs::{self, OpenOptions}, 
+    fs::{self, OpenOptions, File}, 
     process, 
-    io::Error
+    io::{Error, Write}
 };
 use serde::{Serialize, Deserialize};
 
@@ -27,14 +27,22 @@ pub fn read_books() -> Vec<Book> {
     });
     let temp: Vec<Book> = serde_json::from_str(&books).expect("JSON was not well-formatted");
     temp
+    // let file = File::open("books.json").expect("Error opening file");
+    // let data: Vec<Book> = serde_json::from_reader(file).expect("Error getting data from file");
+    // data
 }
 
 pub fn write_books(data: Vec<Book>) -> Result<Vec<Book>, Error> {
-    let mut file = OpenOptions::new()
-        .write(true)
-        .append(false)
-        .open("books.json")?;
+    // This caused issues with bad JSON
+    // let mut file = OpenOptions::new()
+    //     .write(true)
+    //     .append(false)
+    //     .open("books.json")?;
     
-    serde_json::to_writer_pretty(&mut file, &data)?;
+    // serde_json::to_writer_pretty(&mut file, &data)?;
+    // Ok(data)
+    let json_data = serde_json::to_string(&data)?;
+    let mut file = File::create("books.json")?;
+    file.write_all(json_data.as_bytes())?;
     Ok(data)
 }
