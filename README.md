@@ -60,10 +60,9 @@ Created an Axum server on localhost:3000, which contains 2 routes, a simple Hell
   POST <br>
   <b>'/test/cocktail' | Body: {drink: String}:</b> Takes a JSON object with a 'drink' property and sends that thecocktaildb, and sends the user an array of all cocktails contained in the String.
 </details>
-<<<<<<< HEAD
 
 ### 05_Caesar-Cypher
-Created an Axum server on localhost:3000, which contains 4 routes, 2 simple 'hello' POST requests, for some testing, and 2 POST requests for encrypting and decrypting, 'testEncrypt' and 'testDecrypt'. This was a particularily troublesome exercise, as Axum had just updated to implement better middleware features, but I struggled to figure out how to use Tower and Http with Axum, as there wasn't very detailed documentation. I did en up figuring it out, and implemented 'my_middleware', which would go between every route but only change data if the routes are 'testEncrypt' and 'testDecrypt'. Here, a user would add a shift in the path, as well as send JSON in the body, and the middleware would take both of those and encrypt/decrypt a word in the JSON, as well as append a time and date. Afterwards, it would continue sending requests through the layers an it would, until it reaches the POSTs. I learned how to create my own Error responses, how to get a body from an incoming request (through it's bytes), I learned how to modify headers (I need to change header's content-length), and I used a cool in-line function closure to modify char_codes for the en/decryption (the_math variable). <br>
+Created an Axum server on localhost:3000, which contains 4 routes, 2 simple 'hello' POST requests, for some testing, and 2 POST requests for encrypting and decrypting, 'testEncrypt' and 'testDecrypt'. This was a particularily troublesome exercise, as Axum had just updated to implement better middleware features, but I struggled to figure out how to use Tower and Http with Axum, as there wasn't very detailed documentation. I did end up figuring it out, and implemented 'my_middleware', which would go between every route but only change data if the routes are 'testEncrypt' and 'testDecrypt'. Here, a user would add a shift in the path, as well as send JSON in the body, and the middleware would take both of those and encrypt/decrypt a word in the JSON, as well as append a time and date. Afterwards, it would continue sending requests through the layers an it would, until it reaches the POSTs. I learned how to create my own Error responses, how to get a body from an incoming request (through it's bytes), I learned how to modify headers (I need to change header's content-length), and I used a cool in-line function closure to modify char_codes for the en/decryption (the_math variable). <br>
 <details>
   <summary>Routes:</summary>
   <br>
@@ -73,5 +72,19 @@ Created an Axum server on localhost:3000, which contains 4 routes, 2 simple 'hel
   <b>'/hello/':</b> A POST request that simply sends text.<br>
   <b>'/helloeveryoneintheworld/':</b> A POST request that simply sends text.<br>
 </details>
-=======
->>>>>>> 0a18eae26283c9ab93b7a229acff7b83d60dc0ba
+
+### 06_bookstore_app
+Created an Axum server on localhost:3000, which contains 2 GET routes, 1 POST route, 1 PUT route, and 1 DELETE route. The purpose of this server is to simulate a bookstore app, where one can see the books with the GET requests, add new books with POST, update books with PUT, and remove books with DELETE. The goal of this is to learn more about the various REST API methods, create tests for an application, and logging. I also did a bit with building responses, instead of the standard 200 and 422. I have already been fully versed in understanding and using the REST API methods, as well as type-safety of Rust allows minimal body/Path checking, so the biggest hurdle here was creating tests, logging, and how to go about making a database. In terms of the database, I had previously tried to use a file, with JSON data, but I found there were quite a few race conditions writing to file involved, and ended up using a crate called "Lazy Static", which allows me to create a global variable with a mutex, which I then proceed to use as an in-memory database, similar to what I would do in JavaScript. When it came to testing, I decided to use integrated tests, because having the "tests" folder where on the top, where people can see it make me feel better. For that, I was forced to make a `lib.rs`, where I created the route for the main function, and each test. I also created a function that created a local server for each test, for better test consistency, and because I didn't know how to make a test that created one server, as well as having an open server to test caused many inconsistencies and constant restarts.<br>
+<details>
+  <summary>Routes:</summary>
+  <br>
+  GET <br>
+  <b>'/api/books':</b> Sends a JSON array with book data<br>
+  <b>'/api/books/:id':</b> Sends JSON of book data of a specific id<br>
+  POST <br>
+  <b>'/api/books' | Body: {id: u32, title: String, author: String, genre: String, price: f32, quantity: f32}:</b> Creates a book entry in the server database, as long as the id is unique.<br>
+  PUT <br>
+  <b>'/api/books/:id' | Body: {id: [u32], title: [String], author: [String], genre: [String], price: [f32], quantity: [f32]}:</b> Updates a book entry with the ID in the http. The body can optionally have any of the JSON fields, or all.<br>
+  DELETE <br>
+  <b>'/api/books/:id':</b> Removes a book entry of the http ID from the database.<br>
+</details>
