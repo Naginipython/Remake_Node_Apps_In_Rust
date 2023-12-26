@@ -1,1 +1,18 @@
-[{"id":1,"title":"Hunger Games","author":"Suzanne Collins","genre":"Survival","price":20.0,"quantity":20},{"id":2,"title":"39 Clues","author":"Suzanne Collins","genre":"Survival","price":20.0,"quantity":20},{"id":3154679315,"title":"Hunger Games","author":"Suzanne Collins","genre":"Survival","price":20.0,"quantity":20}]
+[
+  {
+    "id": 1,
+    "title": "Hunger Games",
+    "author": "Suzanne Collins",
+    "genre": "Survival",
+    "price": 20.0,
+    "quantity": 20
+  },
+  {
+    "id": 2,
+    "title": "39 Clues",
+    "author": "Rick Riordan",
+    "genre": "Survival",
+    "price": 20.0,
+    "quantity": 20
+  }
+]

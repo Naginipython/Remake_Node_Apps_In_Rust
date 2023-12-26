@@ -1,34 +1,13 @@
 use ex_06_bookstore_app::{
-    // activate_local_server,
-    routes::{Book, read_books},
+    activate_local_server,
+    routes::Book,
 };
-use rand::Rng;
 use reqwest::Body;
 use serde_json::{json, Value};
 
-fn get_random_book_id() -> u32 {
-    let books: Vec<Book> = read_books();
-    // avoids the first, since test_post uses one of those
-    let rng = rand::thread_rng().gen_range(1..=books.len()-1);
-    println!("RNG: {rng}");
-    return books.get(rng).unwrap().id;
-}
-
-fn get_random_u32() -> u32 {
-    let books: Vec<Book> = read_books();
-    let mut random_u32: u32;
-    // Rust's stupid way of doing a `do.. while` loop
-    while {
-        random_u32 = rand::random::<u32>();
-        books.iter().any(|b| b.id == random_u32)
-    } {}
-    return random_u32;
-}
-
 #[tokio::test]
 async fn put_books_successfully_updates_book() {
-    // let addr = activate_local_server().await;
-    let addr = "127.0.0.1:3000";
+    let addr = activate_local_server().await;
 
     let update = json!({
         "title": "Hunger Games",
@@ -38,7 +17,7 @@ async fn put_books_successfully_updates_book() {
         "quantity": 20
     });
 
-    let id = get_random_book_id();
+    let id = 2;
     println!("ID: {id}");
 
     let client = reqwest::Client::new();
@@ -52,17 +31,20 @@ async fn put_books_successfully_updates_book() {
     assert_eq!(response.status(), reqwest::StatusCode::ACCEPTED);
 
     let test = response.json::<Vec<Book>>().await.unwrap();
-    let books: Vec<Book> = read_books();
-    assert_eq!(test, books);
-    assert_eq!(test.len(), books.len());
+    assert!(test.iter().any(|b| b.id == id));
+    let check_data = test.iter().find(|b| b.id == id).unwrap();
+    assert_eq!(check_data.title, "Hunger Games");
+    assert_eq!(check_data.author, "Suzanne Collins");
+    assert_eq!(check_data.genre, "Survival");
+    assert_eq!(check_data.price, 20.00);
+    assert_eq!(check_data.quantity, 20);
 }
 
 #[tokio::test]
 async fn put_books_updates_with_small_json() {
-    // let addr = activate_local_server().await;
-    let addr = "127.0.0.1:3000";
+    let addr = activate_local_server().await;
     let update = json!({"title": "39 Clues"});
-    let id = get_random_book_id();
+    let id = 1;
 
     let client = reqwest::Client::new();
     let response = client.put(&format!("http://{addr}/api/books/{id}"))
@@ -75,17 +57,16 @@ async fn put_books_updates_with_small_json() {
     assert_eq!(response.status(), reqwest::StatusCode::ACCEPTED);
 
     let test = response.json::<Vec<Book>>().await.unwrap();
-    let books: Vec<Book> = read_books();
-    assert_eq!(test, books);
-    assert_eq!(test.len(), books.len());
+    assert!(test.iter().any(|b| b.id == id));
+    let check_data = test.iter().find(|b| b.id == id).unwrap();
+    assert_eq!(check_data.title, "39 Clues");
 }
 
 #[tokio::test]
 async fn put_books_fails_with_unused_id() {
-    // let addr = activate_local_server().await;
-    let addr = "127.0.0.1:3000";
+    let addr = activate_local_server().await;
     let update = json!({"title": "39 Clues"});
-    let unused_id = get_random_u32();
+    let unused_id = 10;
 
     let client = reqwest::Client::new();
     let response = client.put(&format!("http://{addr}/api/books/{unused_id}"))

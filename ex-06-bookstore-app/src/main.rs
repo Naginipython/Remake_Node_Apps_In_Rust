@@ -1,6 +1,6 @@
 use ex_06_bookstore_app::app;
 use std::fs::OpenOptions;
-use tracing::{info, error, Level};
+use tracing::{info, error, Level, debug};
 use tracing_subscriber::{
     prelude::*,
     fmt,
@@ -56,5 +56,6 @@ async fn main() {
     println!("Server is running on localhost:3000");
     error!("test");
     info!("test2");
+    debug!("test3");
     axum::serve(listener, app().await).await.unwrap();
 }

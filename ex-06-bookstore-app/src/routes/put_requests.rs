@@ -1,4 +1,4 @@
-use std::process;
+// use std::process;
 
 use axum::{
     extract::{self, Path}, 
@@ -9,7 +9,7 @@ use http::StatusCode;
 use serde_json::json;
 use serde::Deserialize;
 use tracing::debug;
-use super::Book;
+// use super::Book;
 
 #[derive(Deserialize, Debug)]
 pub struct BookData {
@@ -24,7 +24,8 @@ pub async fn update_book(
     Path(id): Path<u32>,
     extract::Json(body): extract::Json<BookData>,
 ) -> Response {
-    let mut books: Vec<Book> = super::read_books();
+    // let mut books: Vec<Book> = super::read_books();
+    let mut books = super::BOOKS.lock().unwrap();
     
     // Checking if ID exists, to update
     let book = books.iter_mut().find(|b| b.id == id);
@@ -58,17 +59,17 @@ pub async fn update_book(
         },
     }
 
-    match super::write_books(books) {
-        Err(err) => {
-            eprintln!("Error: {err}");
-            process::exit(1);
-        },
-        Ok(books) => {
+    // match super::write_books(books) {
+    //     Err(err) => {
+    //         eprintln!("Error: {err}");
+    //         process::exit(1);
+    //     },
+    //     Ok(books) => {
             return Response::builder()
                 .status(StatusCode::ACCEPTED)
                 .header("content-type", "application/json")
-                .body(Body::from(json!(books).to_string()))
+                .body(Body::from(json!(*books).to_string()))
                 .unwrap();
-        }
-    }
+    //     }
+    // }
 }

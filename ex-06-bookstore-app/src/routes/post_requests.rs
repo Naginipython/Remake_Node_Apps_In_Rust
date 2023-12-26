@@ -1,4 +1,4 @@
-use std::process;
+// use std::process;
 use axum::{
     extract,
     response::Response, 
@@ -7,10 +7,11 @@ use axum::{
 use http::StatusCode;
 use serde_json::json;
 use tracing::debug;
-use super::Book;
+use super::{Book, BOOKS};
 
 pub async fn post_book(extract::Json(body): extract::Json<Book>) -> Response {
-    let mut books = super::read_books();
+    // let mut books = super::read_books();
+    let mut books = BOOKS.lock().unwrap();
 
     if books.iter().any(|b| b.id == body.id) {
         let json = json!({"Error": "id already in database"}).to_string();
@@ -25,17 +26,17 @@ pub async fn post_book(extract::Json(body): extract::Json<Book>) -> Response {
     debug!("Book Created: {body:?}");
     books.push(body);
 
-    match super::write_books(books) {
-        Err(err) => {
-            eprint!("Error: {err}");
-            process::exit(1);
-        },
-        Ok(books) => {
+    // match super::write_books(books) {
+    //     Err(err) => {
+    //         eprint!("Error: {err}");
+    //         process::exit(1);
+    //     },
+    //     Ok(books) => {
             return Response::builder()
                 .status(StatusCode::CREATED)
                 .header("content-type", "application/json")
-                .body(Body::from(json!(books).to_string()))
+                .body(Body::from(json!(*books).to_string()))
                 .unwrap();
-        },
-    }
+    //     },
+    // }
 }

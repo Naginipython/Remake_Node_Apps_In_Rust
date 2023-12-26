@@ -24,3 +24,18 @@
 {"timestamp":"2023-12-26T17:08:54.276934Z","level":"ERROR","fields":{"message":"test"},"target":"ex_06_bookstore_app"}
 {"timestamp":"2023-12-26T17:08:54.870438Z","level":"ERROR","fields":{"message":"test"},"target":"ex_06_bookstore_app"}
 {"timestamp":"2023-12-26T17:09:19.742254Z","level":"ERROR","fields":{"message":"test"},"target":"ex_06_bookstore_app"}
+{"timestamp":"2023-12-26T17:22:23.719529Z","level":"ERROR","fields":{"message":"test"},"target":"ex_06_bookstore_app"}
+{"timestamp":"2023-12-26T17:31:11.560051Z","level":"ERROR","fields":{"message":"Error: EOF while parsing a value at line 1 column 0"},"target":"ex_06_bookstore_app::routes"}
+{"timestamp":"2023-12-26T17:31:27.414662Z","level":"ERROR","fields":{"message":"test"},"target":"ex_06_bookstore_app"}
+{"timestamp":"2023-12-26T17:34:27.557665Z","level":"ERROR","fields":{"message":"Error: EOF while parsing a value at line 1 column 0"},"target":"ex_06_bookstore_app::routes"}
+{"timestamp":"2023-12-26T17:34:33.165474Z","level":"ERROR","fields":{"message":"test"},"target":"ex_06_bookstore_app"}
+{"timestamp":"2023-12-26T18:05:18.182208Z","level":"ERROR","fields":{"message":"test"},"target":"ex_06_bookstore_app"}
+{"timestamp":"2023-12-26T18:55:29.429081Z","level":"ERROR","fields":{"message":"test"},"target":"ex_06_bookstore_app"}
+{"timestamp":"2023-12-26T19:11:53.980045Z","level":"ERROR","fields":{"message":"test"},"target":"ex_06_bookstore_app"}
+{"timestamp":"2023-12-26T19:13:01.079254Z","level":"ERROR","fields":{"message":"test"},"target":"ex_06_bookstore_app"}
+{"timestamp":"2023-12-26T19:13:54.155643Z","level":"ERROR","fields":{"message":"test"},"target":"ex_06_bookstore_app"}
+{"timestamp":"2023-12-26T19:14:34.837716Z","level":"ERROR","fields":{"message":"test"},"target":"ex_06_bookstore_app"}
+{"timestamp":"2023-12-26T19:17:22.025270Z","level":"ERROR","fields":{"message":"test"},"target":"ex_06_bookstore_app"}
+{"timestamp":"2023-12-26T19:17:51.662456Z","level":"ERROR","fields":{"message":"test"},"target":"ex_06_bookstore_app"}
+{"timestamp":"2023-12-26T19:18:18.367989Z","level":"ERROR","fields":{"message":"test"},"target":"ex_06_bookstore_app"}
+{"timestamp":"2023-12-26T19:18:45.518715Z","level":"ERROR","fields":{"message":"test"},"target":"ex_06_bookstore_app"}

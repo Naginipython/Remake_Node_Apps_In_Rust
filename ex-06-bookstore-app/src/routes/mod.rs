@@ -1,8 +1,9 @@
 use std::{
     fs::{self, /*OpenOptions,*/ File}, 
     process, 
-    io::{Error, Write}
+    io::{Error, Write}, sync::Mutex
 };
+use lazy_static::lazy_static;
 use serde::{Serialize, Deserialize};
 use tracing::error;
 
@@ -10,6 +11,11 @@ pub mod get_requests;
 pub mod post_requests;
 pub mod put_requests;
 pub mod delete_requests;
+
+// In-memory database
+lazy_static! {
+    pub static ref BOOKS: Mutex<Vec<Book>> = Mutex::new(read_books());
+}
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Clone)]
 pub struct Book {
@@ -38,6 +44,7 @@ pub fn read_books() -> Vec<Book> {
     // data
 }
 
+// Unused
 pub fn write_books(data: Vec<Book>) -> Result<Vec<Book>, Error> {
     // This caused issues with bad JSON
     // let mut file = OpenOptions::new()
@@ -47,7 +54,7 @@ pub fn write_books(data: Vec<Book>) -> Result<Vec<Book>, Error> {
     
     // serde_json::to_writer_pretty(&mut file, &data)?;
     // Ok(data)
-    // TODO: Race condition here, with tests. Need to put on a single server
+    // Race condition here, with tests. Changed from using file, to in-memory database
     let json_data = serde_json::to_string(&data)?;
     let mut file = File::create("books.json")?;
     file.write_all(json_data.as_bytes())?;

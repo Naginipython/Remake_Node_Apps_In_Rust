@@ -1,29 +1,17 @@
 use ex_06_bookstore_app::{
-    // activate_local_server,
-    routes::{Book, read_books},
+    activate_local_server,
+    routes::Book,
 };
 use reqwest::Body;
 use serde_json::{json, Value};
 
-fn get_random_u32() -> u32 {
-    let books: Vec<Book> = read_books();
-    let mut random_u32: u32;
-    // Rust's stupid way of doing a `do.. while` loop
-    while {
-        random_u32 = rand::random::<u32>();
-        books.iter().any(|b| b.id == random_u32)
-    } {}
-    return random_u32;
-}
-
 #[tokio::test]
 async fn post_books_successfully_adds_book() {
-    // let addr = activate_local_server().await;
-    let addr = "127.0.0.1:3000";
-    let random_u32 = get_random_u32();
+    let addr = activate_local_server().await;
+    let id = 3;
 
     let json = json!({
-        "id": random_u32,
+        "id": id,
         "title": "test",
         "author": "test",
         "genre": "test",
@@ -42,17 +30,19 @@ async fn post_books_successfully_adds_book() {
     assert_eq!(response.status(), reqwest::StatusCode::CREATED);
 
     let test = response.json::<Vec<Book>>().await.unwrap();
-    let books: Vec<Book> = read_books();
-    assert_eq!(test, books);
-    assert_eq!(test.len(), books.len());
+    assert!(test.iter().any(|b| b.id == id));
+    let check_data = test.iter().find(|b| b.id == id).unwrap();
+    assert_eq!(check_data.title, "test");
+    assert_eq!(check_data.author, "test");
+    assert_eq!(check_data.genre, "test");
+    assert_eq!(check_data.price, 20.00);
+    assert_eq!(check_data.quantity, 20);
 }
 
 #[tokio::test]
 async fn post_books_doesnt_allow_same_id() {
-    // let addr = activate_local_server().await;
-    let addr = "127.0.0.1:3000";
-    let books: Vec<Book> = read_books();
-    let used_id = books.get(0).unwrap().id;
+    let addr = activate_local_server().await;
+    let used_id = 1;
 
     let json = json!({
         "id": used_id,
@@ -82,11 +72,10 @@ async fn post_books_doesnt_allow_same_id() {
 
 #[tokio::test]
 async fn post_books_doesnt_allow_bad_data() {
-    // let addr = activate_local_server().await;
-    let addr = "127.0.0.1:3000";
+    let addr = activate_local_server().await;
 
     let bad_json = json!({
-        "id": get_random_u32(),
+        "id": 10,
         "title": "test",
         "author": "test",
         "genre": 5, // requires String
