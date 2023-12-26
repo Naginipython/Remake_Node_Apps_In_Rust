@@ -1,5 +1,5 @@
 use ex_06_bookstore_app::{
-    activate_local_server,
+    // activate_local_server,
     routes::{Book, read_books},
 };
 use rand::Rng;
@@ -26,7 +26,8 @@ fn get_random_u32() -> u32 {
 
 #[tokio::test]
 async fn delete_books_works() {
-    let addr = activate_local_server().await;
+    // let addr = activate_local_server().await;
+    let addr = "127.0.0.1:3000";
 
     let id = get_random_book_id();
 
@@ -46,7 +47,8 @@ async fn delete_books_works() {
 
 #[tokio::test]
 async fn delete_books_fails_with_unused_id() {
-    let addr = activate_local_server().await;
+    // let addr = activate_local_server().await;
+    let addr = "127.0.0.1:3000";
 
     let id = get_random_u32();
 

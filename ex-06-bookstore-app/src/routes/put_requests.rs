@@ -8,6 +8,7 @@ use axum::{
 use http::StatusCode;
 use serde_json::json;
 use serde::Deserialize;
+use tracing::debug;
 use super::Book;
 
 #[derive(Deserialize, Debug)]
@@ -45,6 +46,7 @@ pub async fn update_book(
             if let Some(q) = body.quantity {
                 b.quantity = q;
             }
+            debug!("Book Updated: {b:?}");
         },
         None => {
             let json = json!({"Error": "id not in database"}).to_string();

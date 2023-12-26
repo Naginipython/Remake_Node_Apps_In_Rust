@@ -1,5 +1,5 @@
 use ex_06_bookstore_app::{
-    activate_local_server,
+    // activate_local_server,
     routes::{Book, read_books},
 };
 use reqwest::Body;
@@ -18,7 +18,8 @@ fn get_random_u32() -> u32 {
 
 #[tokio::test]
 async fn post_books_successfully_adds_book() {
-    let addr = activate_local_server().await;
+    // let addr = activate_local_server().await;
+    let addr = "127.0.0.1:3000";
     let random_u32 = get_random_u32();
 
     let json = json!({
@@ -48,7 +49,8 @@ async fn post_books_successfully_adds_book() {
 
 #[tokio::test]
 async fn post_books_doesnt_allow_same_id() {
-    let addr = activate_local_server().await;
+    // let addr = activate_local_server().await;
+    let addr = "127.0.0.1:3000";
     let books: Vec<Book> = read_books();
     let used_id = books.get(0).unwrap().id;
 
@@ -80,7 +82,8 @@ async fn post_books_doesnt_allow_same_id() {
 
 #[tokio::test]
 async fn post_books_doesnt_allow_bad_data() {
-    let addr = activate_local_server().await;
+    // let addr = activate_local_server().await;
+    let addr = "127.0.0.1:3000";
 
     let bad_json = json!({
         "id": get_random_u32(),

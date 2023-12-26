@@ -7,6 +7,7 @@ use axum::{
 };
 use http::StatusCode;
 use serde_json::json;
+use tracing::debug;
 use super::read_books;
 
 pub async fn remove_book(Path(id): Path<u32>) -> Response {
@@ -15,7 +16,8 @@ pub async fn remove_book(Path(id): Path<u32>) -> Response {
     let index = books.iter_mut().position(|b| b.id == id);
     match index {
         Some(i) => {
-            books.swap_remove(i);
+            let b = books.swap_remove(i);
+            debug!("Book Deleted: {b:?}");
         },
         None => {
             let json = json!({"Error": "id not in database"}).to_string();

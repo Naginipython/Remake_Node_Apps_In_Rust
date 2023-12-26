@@ -6,6 +6,7 @@ use axum::{
 };
 use http::StatusCode;
 use serde_json::json;
+use tracing::debug;
 use super::Book;
 
 pub async fn post_book(extract::Json(body): extract::Json<Book>) -> Response {
@@ -21,6 +22,7 @@ pub async fn post_book(extract::Json(body): extract::Json<Book>) -> Response {
     }
     // I'm figuring axum is rigid enough for this to only work if it IS a book
     // That is to say, if it can fit inside the Book struct, it can be pushed here
+    debug!("Book Created: {body:?}");
     books.push(body);
 
     match super::write_books(books) {

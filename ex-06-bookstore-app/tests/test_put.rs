@@ -1,5 +1,5 @@
 use ex_06_bookstore_app::{
-    activate_local_server,
+    // activate_local_server,
     routes::{Book, read_books},
 };
 use rand::Rng;
@@ -27,7 +27,8 @@ fn get_random_u32() -> u32 {
 
 #[tokio::test]
 async fn put_books_successfully_updates_book() {
-    let addr = activate_local_server().await;
+    // let addr = activate_local_server().await;
+    let addr = "127.0.0.1:3000";
 
     let update = json!({
         "title": "Hunger Games",
@@ -58,7 +59,8 @@ async fn put_books_successfully_updates_book() {
 
 #[tokio::test]
 async fn put_books_updates_with_small_json() {
-    let addr = activate_local_server().await;
+    // let addr = activate_local_server().await;
+    let addr = "127.0.0.1:3000";
     let update = json!({"title": "39 Clues"});
     let id = get_random_book_id();
 
@@ -80,7 +82,8 @@ async fn put_books_updates_with_small_json() {
 
 #[tokio::test]
 async fn put_books_fails_with_unused_id() {
-    let addr = activate_local_server().await;
+    // let addr = activate_local_server().await;
+    let addr = "127.0.0.1:3000";
     let update = json!({"title": "39 Clues"});
     let unused_id = get_random_u32();
 

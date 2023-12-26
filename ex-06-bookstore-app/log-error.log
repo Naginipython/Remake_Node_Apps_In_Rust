@@ -1,0 +1,26 @@
+{"timestamp":"2023-12-26T16:47:02.039199Z","level":"ERROR","fields":{"message":"test"},"target":"ex_06_bookstore_app"}
+{"timestamp":"2023-12-26T16:52:27.487398Z","level":"ERROR","fields":{"message":"test"},"target":"ex_06_bookstore_app"}
+{"timestamp":"2023-12-26T16:56:52.293261Z","level":"ERROR","fields":{"message":"test"},"target":"ex_06_bookstore_app"}
+{"timestamp":"2023-12-26T16:57:09.727509Z","level":"ERROR","fields":{"message":"test"},"target":"ex_06_bookstore_app"}
+{"timestamp":"2023-12-26T17:03:57.144522Z","level":"ERROR","fields":{"message":"Error: EOF while parsing a value at line 1 column 0"},"target":"ex_06_bookstore_app::routes"}
+{"timestamp":"2023-12-26T17:08:01.004797Z","level":"ERROR","fields":{"message":"test"},"target":"ex_06_bookstore_app"}
+{"timestamp":"2023-12-26T17:08:30.637730Z","level":"ERROR","fields":{"message":"Error: EOF while parsing a value at line 1 column 0"},"target":"ex_06_bookstore_app::routes"}
+{"timestamp":"2023-12-26T17:08:44.745581Z","level":"ERROR","fields":{"message":"test"},"target":"ex_06_bookstore_app"}
+{"timestamp":"2023-12-26T17:08:45.364307Z","level":"ERROR","fields":{"message":"test"},"target":"ex_06_bookstore_app"}
+{"timestamp":"2023-12-26T17:08:45.958032Z","level":"ERROR","fields":{"message":"test"},"target":"ex_06_bookstore_app"}
+{"timestamp":"2023-12-26T17:08:46.550706Z","level":"ERROR","fields":{"message":"test"},"target":"ex_06_bookstore_app"}
+{"timestamp":"2023-12-26T17:08:47.147699Z","level":"ERROR","fields":{"message":"test"},"target":"ex_06_bookstore_app"}
+{"timestamp":"2023-12-26T17:08:47.742655Z","level":"ERROR","fields":{"message":"test"},"target":"ex_06_bookstore_app"}
+{"timestamp":"2023-12-26T17:08:48.335603Z","level":"ERROR","fields":{"message":"test"},"target":"ex_06_bookstore_app"}
+{"timestamp":"2023-12-26T17:08:48.934656Z","level":"ERROR","fields":{"message":"test"},"target":"ex_06_bookstore_app"}
+{"timestamp":"2023-12-26T17:08:49.523180Z","level":"ERROR","fields":{"message":"test"},"target":"ex_06_bookstore_app"}
+{"timestamp":"2023-12-26T17:08:50.115714Z","level":"ERROR","fields":{"message":"test"},"target":"ex_06_bookstore_app"}
+{"timestamp":"2023-12-26T17:08:50.718101Z","level":"ERROR","fields":{"message":"test"},"target":"ex_06_bookstore_app"}
+{"timestamp":"2023-12-26T17:08:51.309964Z","level":"ERROR","fields":{"message":"test"},"target":"ex_06_bookstore_app"}
+{"timestamp":"2023-12-26T17:08:51.912420Z","level":"ERROR","fields":{"message":"test"},"target":"ex_06_bookstore_app"}
+{"timestamp":"2023-12-26T17:08:52.502154Z","level":"ERROR","fields":{"message":"test"},"target":"ex_06_bookstore_app"}
+{"timestamp":"2023-12-26T17:08:53.088397Z","level":"ERROR","fields":{"message":"test"},"target":"ex_06_bookstore_app"}
+{"timestamp":"2023-12-26T17:08:53.683741Z","level":"ERROR","fields":{"message":"test"},"target":"ex_06_bookstore_app"}
+{"timestamp":"2023-12-26T17:08:54.276934Z","level":"ERROR","fields":{"message":"test"},"target":"ex_06_bookstore_app"}
+{"timestamp":"2023-12-26T17:08:54.870438Z","level":"ERROR","fields":{"message":"test"},"target":"ex_06_bookstore_app"}
+{"timestamp":"2023-12-26T17:09:19.742254Z","level":"ERROR","fields":{"message":"test"},"target":"ex_06_bookstore_app"}
